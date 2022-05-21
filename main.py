@@ -19,10 +19,6 @@ print("                                     ▀▀▀░ ▀▀▀ ▀▀▀ ░
 print("                                     ________________________________________________")
 print("\n\n\n")
 
-# Définitions des bases pour le programme
-
-
-
 # Programme
 
 
@@ -49,6 +45,11 @@ if language == "2":
         await client.change_presence(
         activity=discord.Activity(
             type=discord.ActivityType.playing, name=f"{status}"))
+
+    @client.listen()
+    async def on_command_error(ctx, error):
+        if isinstance(error, commands.CommandNotFound):
+            print("Command not found")
 
         
 
@@ -125,7 +126,10 @@ if language == "1":
         activity=discord.Activity(
             type=discord.ActivityType.playing, name=f"{status}"))
 
-        
+    @client.listen()
+    async def on_command_error(ctx, error):
+        if isinstance(error, commands.CommandNotFound):
+            print("Je ne trouve pas la commande")       
 
     @client.event
     async def on_connect():
@@ -185,4 +189,4 @@ if language == "1":
 
 else:
     print("___________________________________________________________________")
-    print("\n\n Une erreur est survenue")
+    print("\n\n You have to chose '1' or '2'")
